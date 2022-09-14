@@ -13,7 +13,7 @@ def zeros(shape: int):
     out : SMatrix
         Zero matrix of given shape.
     """
-    row_sizes = reversed(range(1, shape + 1))
+    row_sizes = range(shape, 0, -1)
     zeros_data = [[0.0 for _ in range(0, row_size)] for row_size in row_sizes]
     return Smatrix(shape, zeros_data)
     
@@ -34,7 +34,7 @@ class Smatrix:
     """
     def __init__(self, shape: int, data: list[float]):
         # Check invariants on relationship between shape and data
-        for row, size in zip(data, reversed(range(1, shape + 1))):
+        for row, size in zip(data, range(shape, 0, -1)):
             if len(row) != size:
                 raise RuntimeError('Invalid data', 'Row of length ' + str(len(row)) + ' should be of length ' + str(size))
         # If we have reached here then the data invariant is met

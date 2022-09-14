@@ -40,13 +40,3 @@ class Smatrix:
         # If we have reached here then the data invariant is met
         self.shape = shape
         self.data  = data
-
-    """
-    Outputs a list representation of the full matrix
-    
-    Returns
-    -------
-    out : {sequence of sequences of floats}
-    """
-    # def to_list(self):
-    #     return self.var_data # for row in var_data

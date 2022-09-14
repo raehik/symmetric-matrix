@@ -10,3 +10,4 @@ def test_constructors():
   
   two = smatrix.zeros(2)
   assert two.data == [[0, 0], [0]]
+

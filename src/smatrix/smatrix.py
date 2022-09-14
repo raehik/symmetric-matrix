@@ -1,40 +1,50 @@
-def zeros(shape):
+import typing
+
+def zeros(shape: int):
     """
     Return an symmetric matrix of given shape and type, filled with zeros.
     Parameters
     ----------
-    shape : {sequence of ints}
+    shape : int
         Shape of the matrix
 
     Returns
     -------
-    out : matrix
+    out : SMatrix
         Zero matrix of given shape.
     """
-    zeros_data = [[0 for _ in range(0, dim_size)] for dim_size in shape]
-    smatrix(shape, zeros_data)
+    zeros_data = [[0.0 for _ in range(0, row_size)] for row_size in reversed(range(1, shape + 1))]
+    return Smatrix(shape, zeros_data)
     
-class smatrix:
+class Smatrix:
+    var_shape = []
+    var_data  = []
+
     """
-    Construct a symmetrix matrix
+    Construct a symmetrix matrix (necessarily a square matrix)
     Parameters
     ----------
-    shape : {sequene of ints}
-        Shape of the matrix
+    shape : int
+        Size of the matrix
 
     data : {sequence of sequence of floats}
         Data for the symmetric matrix in row-order, where len(data[i]) = shape[i]
     """
-    var_shape: list[int]
-    var_data: list[float]
-    def __init__(self, shape, data):
-        # Check invariant
-        for dim_size, row, dim in zip(shape, data, list(range(0,len(shape)))):
-            if dim_size != len(row):
-                raise DataException('Invalid data', 'Size of dimension ' + dim + ' does not match row length')
+    def __init__(self, shape: int, data: list[float]):
+        # Check invariants on relationship between shape and data
+        for row, size in zip(data, reversed(range(0,len(shape)))):
+            if len(row) != size:
+                raise RuntimeError('Invalid data', 'Row of length ' + str(len(row)) + ' should be of length ' + str(size))
         # If we have reached here then the data invariant is met
-        var_shape = shape
-        var_data  = data
+        self.var_shape = shape
+        self.var_data  = data
 
-    #def toList(self):
-        
+    """
+    Outputs a list representation of the full matrix
+    
+    Returns
+    -------
+    out : {sequence of sequences of floats}
+    """
+    # def to_list(self):
+    #     return self.var_data # for row in var_data

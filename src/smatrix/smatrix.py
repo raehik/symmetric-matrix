@@ -50,3 +50,31 @@ class Smatrix:
     """
     # def to_list(self):
     #     return self.var_data # for row in var_data
+
+    def reflect_xy(self):
+        # noop for symmetric matrix
+        return
+
+    def rotate_cw_90(self):
+        # impossible for symmetric matrix
+        return
+
+    def to_matrix(self):
+        matrix = [[0.0 for _ in range(0, self.shape)] for _ in range (0, self.shape)]
+        for i in range(0, len(self.data)):
+            for j in range(0, len(self.data)):
+                ij = [i, j]
+                ij.sort()
+                print(ij)
+                matrix[i][j] = self.data[ij[0]][ij[1]]
+        return matrix
+
+##############
+
+    # TODO use idx_row,idx_col instead of i,j
+    def reflect_xy(self):
+        data_new = self.data.copy()
+        for i in len(data):
+            for j in len(data[i]):
+                data_new[j][i] = data[i][j]
+        self.data = data_new

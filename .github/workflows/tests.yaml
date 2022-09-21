@@ -1,0 +1,19 @@
+name: Run tests
+
+on:
+  workflow_dispatch: {}
+  
+jobs:
+  pytest:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v3
+    - uses: actions/set-python@v4
+    with:
+      python-version: '3.10'
+      
+    - run: pip install pytest
+    - run: pytest
+   

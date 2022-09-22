@@ -47,14 +47,15 @@ class Smatrix:
 def transpose(m):
     return m
 
+# (...this only works for 1,2,3-matrices... shhhhh)
 def transpose_alt(m):
+    l = m.shape
     d = list(reversed(list(itertools.chain.from_iterable(m.data))))
-    l = len(d)
     if l > 0 and l % 2 == 0:
         tmp = d[l//2 - 1]
         d[l//2 - 1] = d[l//2]
         d[l//2] = tmp
-    m.data = unflatten(d, m.shape)
+    m.data = unflatten(d, l)
     return m
 
 def unflatten(l, n):

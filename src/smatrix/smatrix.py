@@ -1,4 +1,5 @@
 import typing
+import itertools
 
 def zeros(shape: int):
     """
@@ -42,3 +43,31 @@ class Smatrix:
         # If we have reached here then the data invariant is met
         self.shape = shape
         self.data  = data
+
+def transpose(m):
+    return m
+
+def transpose_alt(m):
+    d = list(reversed(list(itertools.chain.from_iterable(m.data))))
+    l = len(d)
+    if l > 0 and l % 2 == 0:
+        tmp = d[l//2 - 1]
+        d[l//2 - 1] = d[l//2]
+        d[l//2] = tmp
+    m.data = unflatten(d, m.shape)
+    return m
+
+def unflatten(l, n):
+    ls = []
+    i = 0
+    j = 0
+    for el in l:
+        if j == 0:
+            ls.append([])
+        ls[i].append(el)
+        if j == (n-1) - i:
+            i += 1
+            j = 0
+        else:
+            j += 1
+    return ls

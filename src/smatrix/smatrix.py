@@ -59,6 +59,10 @@ def transpose_alt(m):
     return m
 
 def unflatten(l, n):
+    """
+    Takes a flat list and a shape, and
+    attempts to create an smatrix of the requested shape.
+    """
     ls = []
     i = 0
     j = 0
